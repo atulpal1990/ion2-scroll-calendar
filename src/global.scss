@@ -1,0 +1,136 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+ion-toolbar {
+  background: var(--ion-color-primary-shade);
+  --background: none!important;
+  color: var(--ion-color-primary-contrast);
+ 
+  ion-title{
+    text-align: center;
+  }
+}
+ion-popover{
+    --width: 90%;
+    padding: 16px;
+    .guest-block{
+      border-bottom: 1px solid #ccc;
+      margin: 10px 10px 0px 10px;
+    }
+    .select-rooms {
+      ion-col {
+        h3{
+          font-size: 14px!important;
+        }
+        ion-select {
+          max-width: 100%;
+          font-size: 14px;
+          border: 1px solid #ccc!important;
+          border-radius: 50px;
+        }
+        p{
+            color: #777e90;
+            font-size: 16px;
+            line-height: 1.5;
+        }   
+      }   
+    }
+    .descrease {
+      ion-icon {
+         border: 1px solid;
+         border-radius: 50px;
+         height: 46px;
+      }
+  }
+  .increase{
+    ion-icon {
+      border: 1px solid;
+      border-radius: 50px;
+      height: 46px;
+   }
+  }
+    ion-row{
+      ion-col {
+      .header{
+      h6{
+        margin-top: 0px;
+      }
+      ion-icon {
+        margin: 10px!important;
+      }
+    }
+  }
+  }
+  .done{
+    float: right!important;
+    height: 46px;
+    margin: 10px;
+  }
+
+  // .passenger-block{
+  //   padding: 0px 5px;
+  // }
+    .passanger-row {
+        border-bottom: 1px solid #ccc;
+        .count{
+          display: flow-root;
+          align-self: center;
+          justify-content: flex-end;
+
+          ion-icon {
+                padding: 6px;
+                margin: 0;
+                border-radius: 50%;
+                border: 1px solid #b1b5c3;
+                color: #b1b5c3;   
+        }
+        ion-row{
+          .label {
+          margin: auto;
+          align-items: center;
+          text-align: center;
+          }
+        }
+      }
+    }
+    .radio{
+      --min-height: 0px;
+    }
+      .submit {
+         border: 1px solid #777e90;
+         border-radius: 50px;
+         height: 46px;
+      }
+  }
+
+  .sc-ion-searchbar-md-h{
+    --background: none!important;
+    --box-shadow: none!important;
+      background: center;
+  }
+ 
+  

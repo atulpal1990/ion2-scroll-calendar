@@ -1,0 +1,353 @@
+<ion-content id="home-page" class="background">
+  <div class="segment-div">
+    <ion-segment value="heart" [(ngModel)]="booking">
+      <ion-segment-button value="hotel" layout="icon-start">
+        <ion-label>Hotel</ion-label>
+        <ion-icon name="bed-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="flight" layout="icon-start">
+        <ion-label>Flight</ion-label>
+        <ion-icon name="airplane-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="car" layout="icon-start">
+        <ion-label>Car Rental</ion-label>
+        <ion-icon name="car-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- <ion-datetime
+  value="2022-04-21T00:00:00"
+  min="2022-03-01T00:00:00"
+  max="2022-05-31T23:59:59"
+></ion-datetime> -->
+<ion-button (click)="gotoCalander()"></ion-button>
+
+    <!-- Hotel search engine start -->
+    <div [ngSwitch]="booking">
+      <div class="hotel-search-div" *ngSwitchCase="'hotel'">
+        <ion-item lines="none" (click)="presentPopover($event)">
+          <h6> Guest</h6>
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-item>
+        <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+          <ng-template>
+            <div class="guest-block">
+              <ion-grid>
+                <ion-row class="select-rooms">
+                  <ion-col size="8">
+                    <h3>Select No. of Rooms</h3>
+                  </ion-col>
+                  <ion-col>
+                    <ion-select interface="popover">
+                      <ion-select-option value="1" selected="true">1</ion-select-option>
+                      <ion-select-option value="2">2 </ion-select-option>
+                      <ion-select-option value="3">3 </ion-select-option>
+                    </ion-select>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <div>
+                <ion-grid>
+                  <ion-row class="select-rooms">
+                    <ion-col size="3">
+                      <h3>Rooms</h3>
+                      <h3> 1 :</h3>
+                    </ion-col>
+                    <ion-col>
+                      <h3>Adult</h3>
+                      <ion-select interface="popover">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2 </ion-select-option>
+                        <ion-select-option value="3">3 </ion-select-option>
+                      </ion-select>
+                      <p> ( 12+ yrs ) </p>
+                    </ion-col>
+                    <ion-col>
+                      <h3>Children</h3>
+                      <ion-select interface="popover">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2 </ion-select-option>
+                        <ion-select-option value="3">3 </ion-select-option>
+                      </ion-select>
+                      <p> ( 2-12 yrs ) </p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </div>
+            <ion-grid>
+              <ion-row class="select-rooms">
+                <ion-col size="12">
+                  <h3>Specify Children age(2-12 yrs)</h3>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-select interface="popover">
+                    <ion-select-option value="1">1</ion-select-option>
+                    <ion-select-option value="2">2 </ion-select-option>
+                    <ion-select-option value="3">3 </ion-select-option>
+                  </ion-select>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button class="done" shape="round">
+                  <ion-icon slot="start" name="checkmark"></ion-icon>Done
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ng-template>
+        </ion-popover>
+        <div class="form-div" (click)="goToHotelsearch()">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <p class="label">Location</p>
+                <p class="detail"> {{hotelCity.city?hotelCity.city+',':'Add destination'}}
+                  {{hotelCity.country?hotelCity.country:''}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div>
+          <ion-grid (click)="hotelDates()">
+            <ion-row class="date-div">
+              <ion-col size="6">
+                <div class="from-date">
+                  <p class="label">Check-in</p>
+                  <p class="date" *ngIf="!checkInDate">Add Date</p>
+                  <p class="date" *ngIf="checkInDate"> {{checkInDate|date:'dd-MMM-yyyy'}}</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="to-date">
+                  <p class="label">Check-out</p>
+                  <p class="date" *ngIf="!checkoutDate">Add Date</p>
+                  <p class="date" *ngIf="checkoutDate"> {{checkoutDate|date:'dd-MMM-yyyy'}}</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <ion-row class="search-button">
+          <ion-col class="ion-padding">
+            <ion-button expand="full" shape="round" (click)="hotelSearch()" >Search</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- Hotel search engine end -->
+      <!-- Flight search engine start -->
+      <div class="hotel-search-div" *ngSwitchCase="'flight'">
+        <ion-row>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-select interface="popover" placeholder="Roundtrip">
+                <ion-select-option value="1" selected>One-way</ion-select-option>
+                <ion-select-option value="2">Round trip </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item class="header" lines="none" (click)="presentPopover($event)">
+              <h6>Passenger</h6>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-item>
+            <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+              <ng-template>
+                <div class="passenger-block">
+                  <ion-row class="passanger-row">
+                    <ion-col>
+                      <p>Adults</p><span>Ages 13 or above </span>
+                    </ion-col>
+                    <ion-col class="count">
+                      <ion-row>
+                        <ion-button fill="clear">
+                          <ion-icon name="remove-outline"></ion-icon>
+                        </ion-button>
+                        <ion-col size="1" class="label">1</ion-col>
+                        <ion-button fill="clear">
+                          <ion-icon name="add-outline"></ion-icon>
+                        </ion-button>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="passanger-row">
+                    <ion-col>
+                      <p>Children</p><span>Ages 2 - 12</span>
+                    </ion-col>
+                    <ion-col class="count">
+                      <ion-row>
+                        <ion-button fill="clear">
+                          <ion-icon name="remove-outline"></ion-icon>
+                        </ion-button>
+                        <ion-col size="1" class="label">0</ion-col>
+                        <ion-button fill="clear">
+                          <ion-icon name="add-outline"></ion-icon>
+                        </ion-button>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="passanger-row">
+                    <ion-col>
+                      <p>Infant</p><span>Under 2</span>
+                    </ion-col>
+                    <ion-col class="count">
+                      <ion-row>
+                        <ion-button fill="clear">
+                          <ion-icon name="remove-outline"></ion-icon>
+                        </ion-button>
+                        <ion-col class="label">0</ion-col>
+                        <ion-button fill="clear">
+                          <ion-icon name="add-outline"></ion-icon>
+                        </ion-button>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                </div>
+                <ion-list class="radio">
+                  <ion-radio-group [allowEmptySelection]="true" value="turtles">
+                    <ion-item lines="none">
+                      <ion-label> Economy</ion-label>
+                      <ion-radio slot="start" value="economy"></ion-radio>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                      <ion-label> Premium Economy</ion-label>
+                      <ion-radio slot="start" value="premium"></ion-radio>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                      <ion-label> Business</ion-label>
+                      <ion-radio slot="start" value="business"></ion-radio>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                      <ion-label> First</ion-label>
+                      <ion-radio slot="start" value="first"></ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+                <ion-button class="submit">Submit</ion-button>
+              </ng-template>
+            </ion-popover>
+          </ion-col>
+        </ion-row>
+
+        <div class="form-div">
+          <ion-grid>
+            <ion-row (click)="goToFlightsearchCity()">
+              <ion-col>
+                <p class="label">From</p>
+                <p class="detail">Departing from?</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div class="form-div">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <p class="label">To</p>
+                <p class="detail">Going to?</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <ion-row class="date-div">
+          <ion-col size="6">
+            <div class="from-date">
+              <p class="label">Departure</p>
+              <p class="date"> Add date</p>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="to-date">
+              <p class="label">Return</p>
+              <p class="date">Add date</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="search-button">
+          <ion-col>
+            <ion-button expand="full" shape="round">Search</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+      <!-- Flight search engine end -->
+      <!-- Car search engine start -->
+      <div class="hotel-search-div" *ngSwitchCase="'car'">
+        <div class="form-div" (click)="getCarPickUpLocation()">
+          <ion-row>
+            <ion-col>
+              <div >
+                <p class="label">Pick up from</p>
+                <p class="detail">City, Airport or Address</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="form-div">
+          <ion-row>
+            <ion-col>
+              <div >
+                <p class="label">Drop-off to</p>
+                <p class="detail">Drop-off to</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="form-div">
+          <ion-row>
+            <ion-col>
+              <div >
+                <p class="label">Pick up date</p>
+                <p class="detail">Add date</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="form-div">
+          <ion-row>
+            <ion-col>
+              <div>
+                <p class="label">Drop-off date</p>
+                <p class="detail">Add date</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="form-div">
+          <ion-row>
+            <ion-col>
+              <div>
+                <p class="label">Pick up time</p>
+                <p class="detail">10:00AM</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="form-div">
+          <ion-row>
+            <ion-col>
+              <div>
+                <p class="label">Drop-off time</p>
+                <p class="detail">10:00AM</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row class="search-button">
+          <ion-col>
+            <ion-button expand="full" shape="round">Search</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- Car search engine end -->
+    </div>
+  </div>
+</ion-content>

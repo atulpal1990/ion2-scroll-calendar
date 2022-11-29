@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>City Search</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="" name="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="hotel-search">
+    <ion-label>Location</ion-label>
+    <ion-searchbar show-clear-button="always"  (ionChange)="handleChange($event)" placeholder="Add destination"></ion-searchbar>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let result of hotelCity" (click)="gotoGetCity(result)">
+      <ion-label>{{ result.city }} {{hotelCity.country}} </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button shape="round" (click)="gotoHotelResult()">Round</ion-button>
+  
+</ion-content>

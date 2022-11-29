@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hotel-Results</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button   routerLink="/home/my-home" name="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+  <div class="segment-div">
+    <ion-segment value="heart" [(ngModel)]="booking">
+      <ion-segment-button  value="hotel" layout="icon-start">
+        <ion-label class="segment-label">Hotel</ion-label>
+        <ion-icon name="bed-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="flight" layout="icon-start">
+        <ion-label class="segment-label">Flight</ion-label>
+        <ion-icon name="airplane-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="car" layout="icon-start">
+        <ion-label class="segment-label">Car Rental</ion-label>
+        <ion-icon name="car-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+         <h6>Banglore</h6>
+         <p>10 Nov 22 - 15 Nov 22</p>
+        </ion-col>
+        <ion-col size="2">
+          <h3><ion-icon name="people-outline"></ion-icon>1</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </div>
+    </ion-card>
+</ion-content>
